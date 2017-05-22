@@ -1,0 +1,190 @@
+         
+\documentclass[1    0pt, answers]{exam} \renewcommand{\baselinestretch}{1.05}
+\usepackage{amsmath,amsthm,verbatim,amssymb,amsfonts,amscd, graphicx}
+\usepackage{graphics}
+\usepackage{paralist}
+
+\usepackage{afterpage}
+\usepackage{caption}
+
+\usepackage{tikz}
+\usepackage{fancybox}
+
+\usepackage{clrscode3e}
+\usepackage{etoolbox,refcount}
+\usepackage{multicol}
+
+\newcounter{countitems}
+\newcounter{nextitemizecount}
+\newcommand{\setupcountitems}{%
+  \stepcounter{nextitemizecount}%
+  \setcounter{countitems}{0}%
+  \preto\item{\stepcounter{countitems}}%
+}
+\makeatletter
+\newcommand{\computecountitems}{%
+  \edef\@currentlabel{\number\c@countitems}%
+  \label{countitems@\number\numexpr\value{nextitemizecount}-1\relax}%
+}
+\newcommand{\nextitemizecount}{%
+  \getrefnumber{countitems@\number\c@nextitemizecount}%
+}
+\newcommand{\previtemizecount}{%
+  \getrefnumber{countitems@\number\numexpr\value{nextitemizecount}-1\relax}%
+}
+\makeatother    
+\newenvironment{AutoMultiColItemize}{%
+\ifnumcomp{\nextitemizecount}{>}{3}{\begin{multicols}{2}}{}%
+\setupcountitems\begin{itemize}}%
+{\end{itemize}%
+\unskip\computecountitems\ifnumcomp{\previtemizecount}{>}{3}{\end{multicols}}{}}
+
+
+\topmargin0.0cm
+\headheight0.0cm
+\headsep0.0cm
+\oddsidemargin0.0cm
+\textheight23.0cm
+\textwidth16.5cm
+\footskip1.0cm
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem*{surfacecor}{Corollary 1}
+\newtheorem{conjecture}{Conjecture}  
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+ \begin{document}
+\unframedsolutions
+
+\section{Weeks 1 and 2}
+
+\begin{questions}
+
+%==1.1==
+Notes. 
+\begin{itemize}
+    \item $G$ is a group and satisfies the group axioms:
+    \begin{itemize}
+        \item There is an identity;
+        \item All elements have an inverse;
+        \item The left and right inverses of an element must be equal.
+        \item The group operation is associative.
+    \end{itemize}
+    \item The cancellation laws hold in $G$ on both sides (for noncommutative groups, too):
+    \begin{itemize}
+        \item $ab = ac$ implies that $b = c$;
+        \item $ba = ca$ implies that $b = c$;
+    \end{itemize}
+    \item The \emph{order} of an element is the smallest power we can take before it becomes the identity.
+    \begin{itemize}
+        \item The \emph{only} element which can have order 1 in any group is the identity. (Because $x^1 = x$. Oops!)
+        \item it's common for elements to have infinite order.
+        \item The unit circle under the group operation of complex multiplication (rotation) has elements with finite order: all the roots of unity. For example, $e^{i*\pi} = -1$ has order 2, since $(-1)^2 = 1$.)
+    \end{itemize}
+    \item If $G$ has finitely many elements (read: "If $G$ is a \emph{finite group}) then we can explicitly list the elements $g_ig_j$ in an $n$ by $n$ matrix (called: the \emph{multiplication table}).
+    \item Example: We are used to seeing multiplication tables from grade school, up to 10 by 10 or 12 by 12. Since integer multiplication is a commutative group, the multiplication table is symmetric.
+\end{itemize}
+
+\begin{theorem}[Proposition]
+If $G$ is a group with group operation $\star$, then
+\begin{enumerate}
+    \item The identity is unique
+    \item The inverse is unique for each $a$ in $G$
+    \item The inverse is nilpotent (read: $(a^{-1})^{-1} = a$)
+    \item The inverse of a multiplication is the multiplication of the inverses, reversed ( $(a \star b)^{-1} = (b^{-1}) \star (a^{-1})$)
+    \item The group operation is associative \emph{in general} (read: on sequences of operations $a_1 \star \ldots \star a_n$).
+\end{enumerate}
+\begin{proof} (In the text)
+(3): Since $v \star v^{-1} = v^{-1} \star v = 1$, an inverse of $v^{-1}$ is $v$. From (2), inverses are unique; so $v$ is \emph{the} inverse of $v^{-1}$.
+(4): Compute it. $(a \star b) \star (b^{-1} \star a^{-1}) = a \star (b \star b^{-1}) \star a = a \star (1) \star a^{-1} = a \star a^{-1} = (1)$. The rest comes from uniqueness of inverse.
+(5): Gross induction proof.
+\end{proof}
+
+\end{theorem}
+
+\question (20) Show that for $x \in G$, $x^{-1}$ and $x$ have the same order.
+\begin{solution}
+% Caroline's solution here
+Use the group `axioms'.
+If $x^n = 1$, then notice $1 = 1^{-1} = (x^n)^{-1} = (x^{-1})^n$ by (4) from the proposition. We're done.
+\end{solution}
+
+\question (25) Prove that if $x^2 = 1$ for all $x$ in $G$, then $G$ is abelian.
+\begin{solution}
+% Caroline's solution here
+Show that the elements commute.
+If $a^2 = 1$ we can show $a = a^{-1}$ (use the cancellation property).
+then $ab = a^{-1}b^{-1} = (ba)^{-1} = ba$, so $G$ is abelian. 
+\end{solution}
+\begin{solution}
+%Hussain's alternative short solution
+\[
+1 = xyxy\\
+x = yxy\\
+yx = xy
+\]
+\end{solution}
+
+%==1.2==
+Notes.
+\begin{itemize}
+    \item Dihedral groups: Are \emph{literally} the rigid motions of regular $n$-gons in 2D Euclidean space. They are denoted $D_{2n}$ (because an $n$-gon has $2n$ rigid motions.)
+    \begin{itemize}
+    \item The dihedral group elements act on their respective $n$-gons. We'll define this more formally in a later section.
+    \item How many elements are in the dihedral group for an $n$-gon relative to $n$? The answer is $2n$. There are $n$ vertices, and the rigid body motion moves a vertex to another vertex after the transformation. Consider vertex 1. There are $n$ distinct  transformations that move vertex 1 to vertex $i$ ($i$ can also equal 1. This is the identity rotation).
+    \item Next, we look at the vertices adjacent to vertex 1. Rigid motions have to preserve the vertices which are adjacent to vertex 1, so after any transformation, we either have 0 - 1 - 2 or 2 - 1 -0 as a sequence of adjacent vertices.
+    \item Depending on which is chosen, we know the entire vertex layout. For example, on a square, setting the vertex sequence to be 2 - 1 - 0 means that vertex 3 must be ``on the left'' of 2 and ``on the right'' of 3.
+    \item For each rotation, there are two vertex sequences (these correspond to the flips). Hence the dihedral group $D_{2n}$ on an $n-$gon has exactly $2n$ (unique) elements.
+    \end{itemize}
+    
+    \item Denote by $r$ a clockwise rotation which moves vertex $i$ to vertex $i + 1$ mod $n$, and let $s$ be a flip through the axis given by vertex 0 and the origin. Then:
+    \begin{itemize}
+        \item The elements $1, \ldots, r^{n-1}$ are all distinct. $r^n = 1$, so the order of $r$ is $n$.
+        \item The order of $s$ is 2.
+        \item It's impossible to have $s = r^i$ (read: flips cannot be made from rotations)
+        \item It's impossible to have (non-trivially) $sr^i = sr^j$. Non-trivial means $i \neq j \mod n$. (read: flips are bijections from the set of cw rotations to the set of ccw rotations.)
+        \item $rs = sr^-1$. (You.. can literally think of this following from the restatement, where rs = r(s acting on 1) = r, since the flipped identity is also the identity.)
+        \item ``If you wanna commute powers of $r$...'' $r^is = sr^{-i}$. (Use induction on $i$...)
+    \end{itemize}
+    \item Generators. (Analogy to basis). A set of group elements $S$ is a generator of its group $G$ if every element in $G$ can be expressed as a finite product of elements in $S$ (and their inverses. Note $S$ need not be a subgroup, just a subset.) We ,may also say $S$ \emph{generates} $G$.
+    \item Relations. Are satisfied by the group generators, e.g. $r^n = 1$ in the dihedral group. Relations are used for simplifying expressions, and can help us determine if two group elements are equal.
+    \item Presentations. Are a set $S$ of group elements with a (finite) set of relations $\mathcal{R} = R_1, \ldots, R_m$. The relations must be \emph{generating relations} in the sense that all other relations on the group must be derivable from the set.
+    \item A presentation is denoted by $G = \langle S | \mathcal{R} \rangle$. A presentation of the dihedral group $D_{2n}$ is $\langle r, s | r^n = s^2 = 1, rs = sr^{-1} \rangle$. 
+    \item the book talks about how under a general presentation of a group we find it difficult to 1) resolve whether two elements are equal or 2) resolve the group determined by a particular presentation. This should be obvious to anyone who's done a bit of formal CS or logic.
+\end{itemize}
+
+\question If $n$ is odd, and $n \geq 3$, show that the identity is the only element of $D_{2n}$ which commutes with all elements of $D_{2n}$.
+
+%=1.3==
+
+%==1.4==
+
+\question (2) Write out all the elements of $GL_2(\mathbb{F}_2)$, and compute the order of each element.
+
+(My translation: write all 2x2 matrices over the field with only two elements. Compute order.)
+
+%=="this handout"==
+\question For every integer $n$, find the number of elements of order $n$ in $S_5$.
+
+%(What's S_5?)
+
+%==1.5==
+\question (2) Write out the group tables for S_3, D_8 and Q_8.
+
+%==1.6==
+\question (17) Let $G$ be any group. Prove that the map from $G$ to itself defined by $g \mapsto g^2$ is a homomorphism if and only if $G$ is abelian.
+
+%==1.7==
+
+\question (17) Let $G$ be a group, and let $G$ act on itself by left conjugation, so that each $g \in G$ maps $G$ to $G$ by $$ x \mapsto g x g^{-1}.$$
+For fixed $g \in G$, prove that conjugation by $g$ is an isomorphism from $G$ onto itself (i.e., is an automorphism of $G$ -- see exc. 20 in section 6). Deduce that $x$ and $g x g^{-1}$ have the same order for all $x$ in $G$, and that for any subset $A$ of $G$, $|A| = |g A g^{-1}|$ ( here $g A g^{-1} = \{g a g^{-1} | a \in A \}$.)
+
+
+
+\end{questions}
+
+\end{document}  
