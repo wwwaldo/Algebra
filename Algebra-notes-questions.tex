@@ -343,8 +343,100 @@ sr^3 &\\
 \question (17) Let $G$ be a group, and let $G$ act on itself by left conjugation, so that each $g \in G$ maps $G$ to $G$ by $$ x \mapsto g x g^{-1}.$$
 For fixed $g \in G$, prove that conjugation by $g$ is an isomorphism from $G$ onto itself (i.e., is an automorphism of $G$ -- see exc. 20 in section 6). Deduce that $x$ and $g x g^{-1}$ have the same order for all $x$ in $G$, and that for any subset $A$ of $G$, $|A| = |g A g^{-1}|$ ( here $g A g^{-1} = \{g a g^{-1} | a \in A \}$.)
 
+%==Supplementary Notes: Counting, Group Actions, and the Orbit-Stabilizer lemma==
+\begin{itemize}
+\item Many groups are actions on sets. We say $G$ acts on $A$ if we can build an evaluation function $\alpha: G \times A \to A$ taking $(g, a) \mapsto g \cdot a$. The evaluation satisfies the following:
+\begin{itemize}
+    \item `associativity' holds: $g \cdot (h \cdot a) = (g \cdot h)(a)$
+    \item The identity must have the expected result: $\alpha(1, a) = a$. Note that the first property does \emph{not} imply the second.
+\end{itemize}
+\item Fixed set: The fixed set of an action is the set of objects left invariant by that action (formally: for $g \in G$, $\text{Fix}(g) \equiv \{ a \in A | g \cdot a = a \}$)
+\item Stabilizer: Conversely, the set of all actions which \emph{fix} $a$ is called the \emph{stabilizer} of $a$.
+\item Orbit: The image of $a$ under all group actions is the \emph{orbit} of $a$, denoted by $\Omega_a$.
+\end{itemize}
 
+% Q2 - Classify the actions
+\question Which of the following are proper actions?
+\begin{parts}
+\part The dihedral group acting on the vertices of a regular $n$-gon.
+\part The dihedral group acting on the \emph{diagonals} of a regular $n$-gon.
+\part An arbitrary group acting on \emph{itself}, using the group operation as the evaluation function: $\alpha(g, a) = a \cdot g$.
+\part An arbitrary group acting on itself, using $\alpha(g,a) = g a g^{-1}$ as the evaluation function.
+\end{parts}
 
+% Educated guesses
+\begin{solution}
+Yes.
+Yes! (If I compose two rigid motions and then apply them to the triangle, is it the same as applying each rigid motion to the triangle, successively?) 
+Nope (has to be commutative lol -- for non-abelian groups associativity $(ab)(c) = (a)(bc)$ implies $c(ab) = bc(a)$. Take b to be the identity and you get commutivity.) But notice using $\alpha(g, a) = g \cdot a$ would actually work.
+No -- $ab(c) = a(bc)$ implies $ab c (ab)^{-1} = a (bc) a^{-1}$ implies $c b^{-1} a^{-1} = a bc a^{-1}$ implies $c b^{-1} = abc$, which is pretty clearly not true in general.
+\end{solution}
+
+% extra questions from the supplementary notes (see 3blue1brown)
+\question Say we want to count how many different necklaces we can build with 6 stones each, if we have stones of two different colours. Define a \emph{diagram} to be any way of colouring each of the six vertices of a hexagone with black or white. Notice that $|A| = 64$. (?) Show that $D_{12}$ acts on $A$, and that the number of orbits of this action is equal to the number of different necklaces.
+Note: This shows that the problem of counting the number of orbits of an action is an interesting problem in combinatorics.
+
+\question Consider the following diagrams: ((some diagrams of 6-necklaces))
+For each necklace, compute the size of its orbit, and the size of its stabilizer. Make a conjecture or formula that relates these two numbers for an arbitrary element in an arbitrary action. Prove it.
 \end{questions}
+
+\section{Weeks 3 and 4}
+\begin{questions}
+% Note -- section 0.2 was assigned as supplmentary reading this week and I may add notes here later
+
+%==1.7== buh buh
+
+% referenced by q19
+\question (18) Let $H$ be a group acting on a set $A$. Prove that the relation $\sim$ on $A$ defined by \[ a \sim b \text{ if and only if } a = hb \text{ for some } h \in H \] is an equivalence relation. (For each $x \in A$ the equivalence class of $x$ under $\sim$ is called the \emph{orbit} of $x$ under the action of $H$. The orbits under the action of $H$ [artition the set $A$. 
+
+\question (19) Let $H$ be a subgroup (see exc. 26 of section 1) of the finite group $G$ and let $H$ act on $G$ (here $A = G$) by left multiplication. Let $x \in G$ and let $\mathcal{O}$ be the orbit of $x$ under the action of $H$. Prove that the map \[ H \to \mathcal{O} \text{ defined by } h \mapsto h x \] is a bijection (hence all orbits have cardinality $|H|$). From this and the preceding exercise deduce \emph{Lagrange's Theorem}: \\
+\emph{if $G$ is a finite group and $H$ is a subgroup of $G$, then $|H|$ divides $|G|$.}
+
+%==2.1== (Subgroups)
+\begin{itemize}
+\item Subgroups of $G$. The set $H$ is a subgroup of $G$ if it is closed under the group operation, and closed under taking inverses. (formally: $x, y \in H$ implies $x^{-1} \in H$ and $x y \in H$). Subgroups $H$ of the group $G$ can be denoted by $H \leq G$.
+\item Also, $H$ cannot be empty.
+\item Check for a subgroup: Proposition. $H$ is a subgroup if
+\begin{itemize}
+    \item $H$ is not empty;
+    \item for all $x, y \in H, xy^{-1} \in H$.
+    \item Proof: (eh, later.)
+\end{itemize}
+\end{itemize}
+
+
+\question (4) Give an explicit example of a group $G$ and an infinite subset $H$ of $G$ that is closed under the group operation, but is not a subgroup of $G$.
+
+\begin{solution}
+% there should be some stuff here
+\end{solution}
+
+%==2.3== Cyclic groups and subgroups
+\question (26) Let $Z_n$ be a cyclic group of order $n$, and let $k$ be an integer which is relatively prime to $n$. Prove that the map $x \mapsto x^k$ is surjective. Then use Lagrange's Theorem to prove that the same is true for \emph{any} finite group of order $n$. Note: For such $k$ each element has a $k$th root in $G$. It follows from Cauchy's theorem (section 3.2) that if $k$ is not relatively prime to the order of $G$, then the map $x \mapsto x^k$ is not surjective.
+
+%==2.4==
+% optional
+
+%==3.1== Quotient groups!! And homomorphisms
+\question (10) Let $\phi : \frac{\mathbb{Z}}{8 \mathbb{Z}} \to \frac{\mathbb{Z}}{4 \mathbb{Z}}$ by $\phi(\bar{a}) = \bar{a}$. Show that this is a well-defined, srjective homomorphism, and describe its fibers and kernel explicitly (Note: showing that $\phi$ is well-defined involves the fact that $\bar{a}$ has a different meaning in the domain and range of $\phi$.)
+
+%==3.2== Cosets and Lagrange's theorem -- Oh shit there are a lot of legit proofs in this section
+\begin{itemize}
+\item Cauchy's Theorem.
+\end{itemize}
+
+\question (11)
+
+%==Week 4 Handout==
+\question (4)
+\question (5)
+
+%==Worksheet: Cyclic Groups==
+
+%==Handout: Burnside's Lemma==
+\end{questions}
+
+\section{Weeks 5 and 6}
+
 
 \end{document}  
