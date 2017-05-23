@@ -173,7 +173,7 @@ None of the rotations $g = r^i$ commute with $s$ ($ri s \neq s ri$ for all $i$),
 None of the flipped rotations $g = sr^i$ commute with $s$ either, because $s (s r^i) = s (r^i s)$ implies $r^i = s (s r^{-i})$ implies $r^i = r^{-i}$ again.
 \end{solution}
 
-%=1.3==
+%==1.3==
 Notes.
 \begin{itemize}
     \item Denote by $S_{\Omega}$ the set of all permutations (read: bijections) of the set $\Omega$. This is a group with composition as the group operation. Call it the \emph{symmetric group} on $\Omega$.
@@ -301,34 +301,34 @@ $(2,3): (1 -> 1 -> 2, 2 -> 3 -> 3, 3 -> 2 -> 1)$
 $(2,5): (1 -> 2 -> 1, 2 -> 3 -> 3, 3 -> 1 -> 2)$
 $(3,2): (1 -> 2 -> 2, 2 -> 1 -> 3, 3 -> 3 -> 1)$
 
-For $D_8$ % I don't wanna :(
+For $D_8$ % T_T check this
 \begin{tabular}{L||L|L|L|L|L|L|L|L||}
-.    &   1 & r   & r^2 & r^3 & s  & sr & sr^2 & sr^3  \\
+.    &   1  & r    & r^2  & r^3  & s    & sr   & sr^2 & sr^3  \\
 \hline\hline
-1    &   1 & r   & r^2  & r^3  & s    & sr   & sr^2 & sr^3 \\
-r    &   r & r^2 & r^3  & 1    & sr   & sr^2 & sr^3 & s    \\
-r^2  & r^2 & r^3 & 1    & r    & sr^2 & sr^3 & s    & sr   \\
-r^3  & r^3 & 1   & r    & r^2  & sr^3 & s    & sr   & sr^2 \\
-s    &   s & rs  & r^2s & r^3s &  \\
-sr   &\\
-sr^2 &\\
-sr^3 &\\
+1    &   1  & r    & r^2  & r^3  & s    & sr   & sr^2 & sr^3 \\
+r    &   r  & r^2  & r^3  & 1    & sr   & sr^2 & sr^3 & s    \\
+r^2  & r^2  & r^3  & 1    & r    & sr^2 & sr^3 & s    & sr   \\
+r^3  & r^3  & 1    & r    & r^2  & sr^3 & s    & sr   & sr^2 \\
+s    &   s  & sr^3 & sr^2 & sr   & 1    & r^3  & r^2  & r^1  \\
+sr   &  sr  & 1    & sr^3 & sr^2 & r    & 1    & r^3  & r^2  \\
+sr^2 & sr^2 & sr   & s    & sr^3 & r^2  & r    & 1    & r^3  \\
+sr^3 & sr^3 & sr^2 & sr   & s    & r^3  & r^2  & r    & 1\\
 \hline
 \end{tabular}\\
 
 For $Q_8$
-%copy-pasted
+% Terrible.
 \begin{tabular}{L||L|L|L|L|L|L|L|L||}
-.    &   1 & r   & r^2 & r^3 & s  & sr & sr^2 & sr^3  \\
+.  & 1  & i  & j  & k  & -1 & -i & -j & -k  \\
 \hline\hline
-1    &   1 & r   & r^2  & r^3  & s    & sr   & sr^2 & sr^3 \\
-r    &   r & r^2 & r^3  & 1    & sr   & sr^2 & sr^3 & s    \\
-r^2  & r^2 & r^3 & 1    & r    & sr^2 & sr^3 & s    & sr   \\
-r^3  & r^3 & 1   & r    & r^2  & sr^3 & s    & sr   & sr^2 \\
-s    &   s & rs  & r^2s & r^3s &  \\
-sr   &\\
-sr^2 &\\
-sr^3 &\\
+1  & 1  & i  & j  & k  & -1 & -i & -j & -k \\
+i  & i  & -1 & -k & -j & -i & 1  & k  & j  \\
+j  & j  & k  & -1 & -i & -j & -k & 1  & i  \\
+k  & k  & j  & i  & -1 & -k & -j & -i & 1  \\
+-1 & -1 & -i & -j & -k & 1  & i  & j  & k  \\
+-i & -i & 1  & k  & j  & i  & -1 & -k & -j \\
+-j & -j & -k & 1  & i  & j  & k  & -1 & -i \\
+-k & -k & -j & -i & 1  & k  & j  & i  & -1 \\
 \hline
 \end{tabular}\\
 \end{solution}
