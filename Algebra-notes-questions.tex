@@ -333,19 +333,80 @@ k  & k  & j  & i  & -1 & -k & -j & -i & 1  \\
 \end{tabular}\\
 \end{solution}
 
-%==1.6==
+%==1.6== Homomorphisms and Isomorphisms
+Notes 
+\begin{itemize}
+\item Relating two groups: We have some facts and theorems about group $A$ and we would like to apply them in some way to group $B$. We see that $A$ and $B$ are `very similar' in some way -- multiplication on elements of $A$ somehow behaves similarly on other elements of $B$. How can we relate the two groups?
+\item Homomorphisms: A homomorphism is an operation $\phi$ which relates the group operations of two \emph{separate} groups. Formally, \emph{the image of group elements under a homomorphism behave well with respect to the group operation in the new group}.
+\item Notation: a homomorphism is a transformation $\phi : G_1 \to G_2$ such that for any two elements $x, y$ in $G_1$, $\phi(x \star y) = \phi(x) \diamond \phi(y)$.
+\item In other words, a well-defined homomorphism allows us to move \emph{between groups}, using whichever group operation we prefer, without a loss of information.
+\item Example: Let $H$ be a subgroup of $G$. Then the inclusion map $ i : H \to G$ is a homomorphism of $H$ to $G$.
+\item Isomorphism: there is another desirable property to have when discussing two groups: it is bijectivity. We say that a homomorphism  of $G$ and $H$ which is also bijective is an \emph{isomorphism} of $G$ and $H$. Groups for which an isomorphism exists are said to be \emph{isomorphic} to each other; they can also have the same \emph{isomorphism type}.
+\item Example: The exponential map taking $\mathbb{R} \to \mathbb{R}^{+}$, $x \mapsto e^{x}$, takes the additive reals to the multiplicative reals (read: an isomorphism of the reals. q: in what world are we restricted from multiplication, but are allowed to exponentiate/ is this ever useful?)
+\item Example: All of the symmetric groups on finite sets of order $n$ are isomorphic. Reason: Define $\phi$ to be any bijection between the two sets $\Omega$ and $\Delta$ (we know such a bijection $\theta$ exists because by definition of finite of order $n$, there are bijections from both sets to the set $\{1, \ldots, n \} \subseteq \mathbb{N}$). 
+\item Let $\sigma$ be a permutation on $\Delta$ and $\phi$ be such that $\sigma(x) = y \implies \phi(\sigma)(\theta(x)) = \theta(y)$ in $\Omega$. (``Pick the bijective $\phi$ on permutations which works after fixing the bijective $\theta$ on set elements.'')
+\item Conversely, it can be shown that two isomorphic symmetric groups must have underlying sets of the same order (even for infinite sets $\Omega$ and $\Delta$). (The finite case is very easy, just assert that $n! = m!$ implies $n = m$ % sorry for inconsistent notation, the ideas are all really simple
+\end{itemize}
+
+\begin{itemize}
+\item Classification theorems: properties categorising a set of groups related under isomorphism, e.g. any non-abelian group of order 6 is isomorphism to $S_3$ (the only other order 6 group is $\frac{\mathbb{Z}}{6 \mathbb{Z}}$) % huh
+\item (Condition for isomorphisms of generated groups.) Suppose we have $m$ elements which generate the group $G$, and $m$ elements which belong to the group $H$. If a bijection exists where $\psi(g_i) = h_i$ \emph{preserves the relations imposed on the $g_i$ in the presentation of $G$}, then there is in fact a unique \emph{homomorphism} from $G$ to $H$ (probably as an extension of $\psi$, but we'll see later)
+\item Note: if $|G| = |H|$ then this homomorphism becomes an isomorphism.
+\item The corresponding statement for vector spaces: Two $n$-dimensional vector spaces are isomorphic by (some invertible linear transformation of the basis in $V$ to the basis in $W$).
+\item (Then some examples)
+\end{itemize}
+
+\begin{theorem}
+If $G$ and $H$ are isomorphic groups, then
+\begin{itemize}
+\item $|G| = |H|$
+\item $G$ abelian iff $H$ abelian
+\item For all $x \in G$, $|x| = |\phi(x)|$ (the orders of $x$ and $\phi(x)$ must be equal)
+\end{itemize}
+\end{theorem}
+
 \question (17) Let $G$ be any group. Prove that the map from $G$ to itself defined by $g \mapsto g^2$ is a homomorphism if and only if $G$ is abelian.
 
+%Caroline's soln, yay
 \begin{solution}
+Use the homomorphism condition $\phi(xy) = \phi(x)\phi(y)$. In this case it reduces to $x^2 y^2 = (xy)^2 = (xy)(xy)$ which is equivalent to $xy = yx$ after left-multiplying by $x^{-1}$ and right-multiplying by $y^{-1}$ (cancellation property).
+\end{solution}
 
-%==1.7==
+%==1.7== Group Actions -- see supp notes below this section for more defns
+
+% Any group which supports an action on $A$ is in fact homomorphic to the group of permutations on A ``the symmetric group''
+% ie. ``every element in $G$ acts as a permuation on $A$ in a manner consistent with the group operation on $G$''
+
+\begin{theorem}
+Fix $g \in G$. If $G$ is a group which acts on $A$, define the map $\sigma_g : A \to A$ to be the evaluator $g \cdot a$. Then
+\begin{itemize}
+    \item sigma is actually a permutation of $A$
+    \item the map $g \mapsto sigma_g$ is a homomorphism.
+\end{itemize}
+\end{theorem}
+\begin{proof}
+Property (1) holds because of the `associativity' property of actions. For any $\sigma_g$, its inverse is $\sigma_{g^{-1}}$:
+\begin{align*}
+( \sigma_g \circle \sigma_{g^{-1}})(a) = g \circle (g^{-1}(a)) = (g \circle g^{-1})(a) = (I)a = a.
+\end{align*}
+The first equality was from defn of composition. This is actually sufficient, because remember, `permutation' means `bijection'. The sigmas map $A$ back to itself and were just shown to have (two-sided) inverses; thus they are bijective (see also prop'n 1 of section 0.1).
+Property (2): Using the above definition of the homomorphism $\phi$, we compute, for all $a \in A$ and for aribtrary group elements of $G$, $g_1$ and $g_2$:
+\begin{align*}
+\phi(g_1 g_2)(a) & = \sigma_{g_1 g_2}(a) = (g_1 g_2) \cdot a  = g_1 \cdot ( g_2 \cdot a) \\
+& = \sigma_{g_1} ( \sigma_{g_2} (a)) = (\phi(g_1) \circle \phi(g_2))(a)
+\end{align*}
+\end{proof}
+
+\begin{itemize}
+\item (then a bunch of examples)
+\end{itemize}
 
 \question (17) Let $G$ be a group, and let $G$ act on itself by left conjugation, so that each $g \in G$ maps $G$ to $G$ by $$ x \mapsto g x g^{-1}.$$
 For fixed $g \in G$, prove that conjugation by $g$ is an isomorphism from $G$ onto itself (i.e., is an automorphism of $G$ -- see exc. 20 in section 6). Deduce that $x$ and $g x g^{-1}$ have the same order for all $x$ in $G$, and that for any subset $A$ of $G$, $|A| = |g A g^{-1}|$ ( here $g A g^{-1} = \{g a g^{-1} | a \in A \}$.)
 
 %==Supplementary Notes: Counting, Group Actions, and the Orbit-Stabilizer lemma==
 \begin{itemize}
-\item Many groups are actions on sets. We say $G$ acts on $A$ if we can build an evaluation function $\alpha: G \times A \to A$ taking $(g, a) \mapsto g \cdot a$. The evaluation satisfies the following:
+\item Many groups are actions on sets. We say $G$ acts on $A$ (on the left) if we can build an evaluation function $\alpha: G \times A \to A$ taking $(g, a) \mapsto g \cdot a$. The evaluation satisfies the following:
 \begin{itemize}
     \item `associativity' holds: $g \cdot (h \cdot a) = (g \cdot h)(a)$
     \item The identity must have the expected result: $\alpha(1, a) = a$. Note that the first property does \emph{not} imply the second.
