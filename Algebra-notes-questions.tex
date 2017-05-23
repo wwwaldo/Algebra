@@ -178,6 +178,7 @@ Notes.
     \item You can compute products of permutations in a dumb and easy way using decompositions. Also, cycle decompositions are unique.
     \item example: $(1,2) \circ (1,3) = (1, 3, 2)$ and $(1, 3) \circ (1, 2) = (1, 2, 3)$.
     \item By the way, the last example shows that $S_n$ is non-abelian. However, \emph{disjoint} cycles commute.
+    \item Useful fact: The order of a permutation is the \emph{lowest common multiple} of the lengths of all of its cycles. (Thus every element in $S_n$ must have finite order. Neat!)
 \end{itemize}
 
 \question (optional). Let $\sigma$ be the permutation
@@ -199,18 +200,74 @@ Find the cycle decompositions of the following permutations:
 \end{solution}
 
 %==1.4==
+Notes
+\begin{itemize}
+    \item The General Linear group: It's the set of all nonsingular matrices over a field $F$ (Why this matters: these are the linear transformations of a vector space $V$ which take bases onto bases. They can also be thought of as the isomorphisms of the space.)
+    \item It is denoted by $GL_n(V)$, where $V$ is a vector space.
+    \item It is a group! Under composition. We can check this with the nifty formula $\det(A \dot B) = \det(A) \det(B)$. The identity is the identity transformation, and the inverse on an element is just its inverse matrix.
+    \item Fields: Fields are endowed with two group operations, $+$ and $\dot$. The distributive identity $a(b + c) = ab + ac$ holds. We also require the additive, multiplicative groups to be abelian (so stuff commutes).
+    \item Fact no. 1. If $F$ is a field of finite order (read: size), then the size of $F$ is equal to $p^k$, where $p$ is prime, and $k$ is an integer.
+    \item Fact no. 2. Also, if $F$ is a field of finite order $q$, then the general linear group over $F$ has size equal to $(q^n - 1)(q^n - q)(q^n - q^2)\ldots(q^n - q^{n-1})$. Neat!
+\end{itemize}
 
 \question (2) Write out all the elements of $GL_2(\mathbb{F}_2)$, and compute the order of each element.
 
-(My translation: write all 2x2 matrices over the field with only two elements. Compute order.)
+(My translation: write all 2x2 invertible matrices over the field with only two elements. Compute order.)
+
+\begin{solution}
+\[
+\begin{bmatrix}
+1 & 0 \\
+0 & 1
+\end{bmatrix} \] 
+This has det = 1 - 0 = 1, and order 1 -- it's the identity!
+\[
+\begin{bmatrix}
+0 & 1 \\
+1 & 0
+\end{bmatrix} \]
+This has det = 0 -1 = -1 = 1, and order 2 (e1 gets sent to e2, and vice versa, so just take it twice).
+Since $0 \times 1 = 0 \times 0 = 0$, and $1 - 1 = 1 + 1 = 0$, there aren't any other matrices.
+\end{solution}
 
 %=="this handout"==
 \question For every integer $n$, find the number of elements of order $n$ in $S_5$.
 
-%(What's S_5?)
+%(What's S_5?) -- Ans: Oh, it's the symmetric (permutation) group on sets of 5 elements.
+
+%Caroline-soln
+\begin{solution}
+Using cyclic decomposition notation for permutations.
+1: It's the identity permutation.
+2: All permutations of the form (a b)(c d)(e) or (a b)(c)(d)(e)
+3: Just (a b c)(d)(e).
+4: Just (a b c d)(e).
+5: (a b c d e).
+That was easy.
+\end{solution}
 
 %==1.5==
+Notes
+\begin{itemize}
+\item The! Quaternion! Group!! Is given by $Q_8 = \{ 1, -1, i, -i, j, -j, k, -k \}$ (these are the unit quaternions.)
+\item The group operation is quaternion multiplication. The quaternion multiplication rules are:
+\begin{itemize}
+    \item $(-1)^2 = 1, i^2 = j^2 = k^2 = -1$;
+    \item $ij = k, ji = -k$;
+    \item $jk = i, kj - -i$;
+    \item $ik =j, ki = -j$;
+    \item $1 \dot a = a$, for all $a \in Q_8$.
+\end{itemize}
+\item Clearly, $Q_8$ is not abelian.
+\end{itemize}
+
 \question (2) Write out the group tables for S_3, D_8 and Q_8.
+% S_3 -> symmetry (permutation) group on three els
+% D_8 -> dihedral group on a square
+% Q_8 -> quaternion group
+\begin{solution}
+
+\end{solution}
 
 %==1.6==
 \question (17) Let $G$ be any group. Prove that the map from $G$ to itself defined by $g \mapsto g^2$ is a homomorphism if and only if $G$ is abelian.
