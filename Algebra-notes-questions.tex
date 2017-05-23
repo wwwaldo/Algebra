@@ -7,12 +7,18 @@
 \usepackage{afterpage}
 \usepackage{caption}
 
+\usepackage{amstext} % for \text macro
+\usepackage{array}   % for \newcolumntype macro
+
+
 \usepackage{tikz}
 \usepackage{fancybox}
 
 \usepackage{clrscode3e}
 \usepackage{etoolbox,refcount}
 \usepackage{multicol}
+
+\newcolumntype{L}{>{$}l<{$}} % math-mode version of "l" column type
 
 \newcounter{countitems}
 \newcounter{nextitemizecount}
@@ -57,7 +63,7 @@
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}
 
- \begin{document}
+\begin{document}
 \unframedsolutions
 
 \section{Weeks 1 and 2}
@@ -65,15 +71,16 @@
 \begin{questions}
 
 %==1.1==
-Notes. 
 \begin{itemize}
     \item $G$ is a group and satisfies the group axioms:
+    
     \begin{itemize}
         \item There is an identity;
         \item All elements have an inverse;
         \item The left and right inverses of an element must be equal.
         \item The group operation is associative.
     \end{itemize}
+    
     \item The cancellation laws hold in $G$ on both sides (for noncommutative groups, too):
     \begin{itemize}
         \item $ab = ac$ implies that $b = c$;
@@ -205,7 +212,7 @@ Notes
     \item The General Linear group: It's the set of all nonsingular matrices over a field $F$ (Why this matters: these are the linear transformations of a vector space $V$ which take bases onto bases. They can also be thought of as the isomorphisms of the space.)
     \item It is denoted by $GL_n(V)$, where $V$ is a vector space.
     \item It is a group! Under composition. We can check this with the nifty formula $\det(A \dot B) = \det(A) \det(B)$. The identity is the identity transformation, and the inverse on an element is just its inverse matrix.
-    \item Fields: Fields are endowed with two group operations, $+$ and $\dot$. The distributive identity $a(b + c) = ab + ac$ holds. We also require the additive, multiplicative groups to be abelian (so stuff commutes).
+    \item Fields: Fields are endowed with two group operations, $+$ and $\cdot$. The distributive identity $a(b + c) = ab + ac$ holds. We also require the additive, multiplicative groups to be abelian (so stuff commutes).
     \item Fact no. 1. If $F$ is a field of finite order (read: size), then the size of $F$ is equal to $p^k$, where $p$ is prime, and $k$ is an integer.
     \item Fact no. 2. Also, if $F$ is a field of finite order $q$, then the general linear group over $F$ has size equal to $(q^n - 1)(q^n - q)(q^n - q^2)\ldots(q^n - q^{n-1})$. Neat!
 \end{itemize}
@@ -261,42 +268,75 @@ Notes
 \item Clearly, $Q_8$ is not abelian.
 \end{itemize}
 
-\question (2) Write out the group tables for S_3, D_8 and Q_8.
+\question (2) Write out the group tables for $S_3, D_8 and Q_8$.
 % S_3 -> symmetry (permutation) group on three els
 % D_8 -> dihedral group on a square
 % Q_8 -> quaternion group
 \begin{solution}
 Table is always of the form (col) compose (row) -- this is consistent with the book's notation
 `` The (i, j) entry contains $g_i g_j$''.
-\begin{center}
 \renewcommand\arraystretch{1.3}
 \setlength\doublerulesep{0pt}
-For $S_3$ (6 elements) --> the diagonal eles in the first four should be the identity, whoops
-\begin{tabular}{r||*{4}{2|}}
+For $S_3$ (6 elements), the diagonal eles in the first four should be the identity, whoops\\
+\pagebreak
+
+\begin{tabular}{r||c|c|c|c|c|c||}
 . &         (1)(2)(3) & (1, 2)(3) & (1)(2, 3) & (2)(1, 3) & (1, 2, 3) & (3, 2, 1)  \\
 \hline\hline
 (1)(2)(3) & (1)(2)(3) & (1, 2)(3) & (1)(2, 3) & (2)(1, 3) & (1, 2, 3) & (3, 2, 1) \\ 
 \hline
-(1, 2)(3) & (1, 2)(3) & (1, 2)(3) & (1, 2, 3) & (1, 2, 3) & (1, 3)(2)\\ 
+(1, 2)(3) & (1, 2)(3) & (1)(2)(3) & (1, 2, 3) & (1, 2, 3) & (1, 3)(2) & (1)(2, 3)\\ 
 \hline
-(1)(2, 3) & (1)(2, 3) & (1, 2, 3) & (1)(2, 3) & (3, 2, 1) & (1, 2)(3)\\ 
+(1)(2, 3) & (1)(2, 3) & (1, 2, 3) & (1)(2)(3) & (3, 2, 1) & (1, 2)(3) & (1, 3)(2)\\ 
 \hline
-(2)(1, 3) & (2)(1, 3) & (3, 2, 1) & (1, 2, 3) & (2)(1, 3) & (2, 3)(1)\\ 
+(2)(1, 3) & (2)(1, 3) & (3, 2, 1) & (1, 2, 3) & (1)(2)(3) & (2, 3)(1) & (3)(1, 2)\\ 
 \hline
-(1, 2, 3) & (1, 2, 3) & (1)(2, 3) & (1, 3)(2) & (1, 2)(3) & (1, 2, 3)\\
+(1, 2, 3) & (1, 2, 3) & (1)(2, 3) & (1, 3)(2) & (1, 2)(3) & (1, 2, 3) & (1)(2)(3) \\
 \hline
-(3, 2, 1) & (3, 2, 1) & (3)(1, 2) & (3)(1, 2) & (3, 2)(1) & (1)(2)(3)\\
+(3, 2, 1) & (3, 2, 1) & (3)(1, 2) & (3)(1, 2) & (3, 2)(1) & (1)(2)(3) & (3, 2, 1)\\
 \hline
-\end{tabular}
+\end{tabular}\\
 Some rough work for entry (col, row)
-(2,3): (1 -> 1 -> 2, 2 -> 3 -> 3, 3 -> 2 -> 1)
-(2,5): (1 -> 2 -> 1, 2 -> 3 -> 3, 3 -> 1 -> 2)
-(3,2): (1 -> 2 -> 2, 2 -> 1 -> 3, 3 -> 3 -> 1)
-\end{center}
+$(2,3): (1 -> 1 -> 2, 2 -> 3 -> 3, 3 -> 2 -> 1)$
+$(2,5): (1 -> 2 -> 1, 2 -> 3 -> 3, 3 -> 1 -> 2)$
+$(3,2): (1 -> 2 -> 2, 2 -> 1 -> 3, 3 -> 3 -> 1)$
+
+For $D_8$ % I don't wanna :(
+\begin{tabular}{L||L|L|L|L|L|L|L|L||}
+.    &   1 & r   & r^2 & r^3 & s  & sr & sr^2 & sr^3  \\
+\hline\hline
+1    &   1 & r   & r^2  & r^3  & s    & sr   & sr^2 & sr^3 \\
+r    &   r & r^2 & r^3  & 1    & sr   & sr^2 & sr^3 & s    \\
+r^2  & r^2 & r^3 & 1    & r    & sr^2 & sr^3 & s    & sr   \\
+r^3  & r^3 & 1   & r    & r^2  & sr^3 & s    & sr   & sr^2 \\
+s    &   s & rs  & r^2s & r^3s &  \\
+sr   &\\
+sr^2 &\\
+sr^3 &\\
+\hline
+\end{tabular}\\
+
+For $Q_8$
+%copy-pasted
+\begin{tabular}{L||L|L|L|L|L|L|L|L||}
+.    &   1 & r   & r^2 & r^3 & s  & sr & sr^2 & sr^3  \\
+\hline\hline
+1    &   1 & r   & r^2  & r^3  & s    & sr   & sr^2 & sr^3 \\
+r    &   r & r^2 & r^3  & 1    & sr   & sr^2 & sr^3 & s    \\
+r^2  & r^2 & r^3 & 1    & r    & sr^2 & sr^3 & s    & sr   \\
+r^3  & r^3 & 1   & r    & r^2  & sr^3 & s    & sr   & sr^2 \\
+s    &   s & rs  & r^2s & r^3s &  \\
+sr   &\\
+sr^2 &\\
+sr^3 &\\
+\hline
+\end{tabular}\\
 \end{solution}
 
 %==1.6==
 \question (17) Let $G$ be any group. Prove that the map from $G$ to itself defined by $g \mapsto g^2$ is a homomorphism if and only if $G$ is abelian.
+
+\begin{solution}
 
 %==1.7==
 
