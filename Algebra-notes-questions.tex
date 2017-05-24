@@ -468,9 +468,37 @@ For each necklace, compute the size of its orbit, and the size of its stabilizer
 
 \question (4) Give an explicit example of a group $G$ and an infinite subset $H$ of $G$ that is closed under the group operation, but is not a subgroup of $G$.
 
+% Caroline's solution
 \begin{solution}
-% there should be some stuff here
+Let $G$ be the integers with addition as the group operation, and let $H$ be the positive integers. The sum of any two positive integers is another positive integer, but no integer has an additive inverse. (We can throw in zero to catch the identity, but I don't think this was required.)
 \end{solution}
+
+%==2.2== (Optional for now) Centralizers, Normalizers, Stabilizers and Kernels
+\begin{itemize}
+\item Centralizer. Let $A$ be a subset of $G$. For some elements $g$ of the group, elements of $a$ will be invariant in the following way: $g a g^{-1} = a$. The \emph{centralizer} of $A$ in $G$ is the set of all elements $g$. We may denote it by $C_{G}(A) = \{ g \in G | \forall a \in A,  g a g^{-1} = a \}$.
+\item The centralizer of any subset is a subgroup of $G$.
+\item Proof: Let x,y be centralizers of $A$ in $G$. Then for $a \in A$, $(xy) a (xy)^{-1} = x(yay^{-1})x^{-1} = a$. Also, if $x$ is a centralizer of $A$, then so is $x^{-1}$, since $x a x^{-1} = a \implies x^{-1}x a x^{-1}x = x^{-1} a x \implies a = x^{-1} a x$. Finally, the identity belongs to the centralizer of any set.
+\item Center. The \emph{center} of $G$ is the set of all elements which commute with $G$. It is denoted by $Z(G) = \{ g \in G | \forall x \in G, gx = xg \}$. It is a special case of the centralizer: $C_G (G) = \{ g \in G | \forall x \in G g^-1 x g = x \}$ Multiplying the equality on both sides by $g$, we obtain, equivalently, $\forall x \in G, x g = g x $, the definition of elements in the center.
+\item Normalizer. The \emph{normalizer} of a set $A$ in $G$ is the set of elements $g$ which leave $A$ invariant \emph{as a whole}  under the action of $g$. Formally, denote this by $N_G (A) = \{ g \in G | g A g^{-1} = A \}$, where the set $g A g^{-1} = \{ g a g^{-1} | a \in A \}$. The normalizer of $A$ contains the centralizer of $A$ as a (strict) subset in general. The normalizer is also a subgroup of $G$.
+\item Examples:
+\begin{itemize}
+    \item Abelian groups have $G$ as their center ($Z(G)$). In fact, $C_G (A) = G$ for any subset $A$, implying that the normalizer of $A$ is also $G$ for all $A$.
+    \item The (non-commutative) dihedral group $D_8$ has an commutative (abelian) subgroup $A = \{ 1, r, r^2, r^3 \}$:
+    \item The centralizer of $A$ is $A$;
+    \item The normalizer of $A$ is $G$ (flipping an n-gon twice reverts it back to the original rotation-orientation);
+    \item The center of $D_8$ is $\{1, r^2 \}$.
+    \item Let $G$ be the symmetric group (permutation group) on 3-sets $S_3$, and $A$ be the subgroup $\{ (1), (1 2) \}$:
+    \item The center and normalizer of $A$ are both $A$ (One proof is by Lagrange's Theorem);
+    \item The center of $G$ is the identity alone.
+\end{itemize}
+\item Stabilizers and Kernels: Literally the same thing, but replace $A$ with some arbitrary set $S$, and let $G$ act on $S$.
+\item Preamble: The proof of subgroupiness of the centralizer and normalizer relies on theorems about group actions. This indicates that $G$ is somehow determined by its action on its subsets.
+\item Stabilizers. If $G$ is a group acting on a set $S$, and $s$ is some fixed element of $S$, the \emph{stabilizer} of $s$ is the set of elements which leave it invariant under multiplication proper: $G_s = \{ g \in G | g \cdot s = s \}$. The stabilizer is also a subgroup.
+\item Kernel: is the generalization of stabilizer to sets $S$ from points $s$. $g$ must leave \emph{all} points invariant under multiplication.
+
+
+\end{itemize}
+
 
 %==2.3== Cyclic groups and subgroups
 \question (26) Let $Z_n$ be a cyclic group of order $n$, and let $k$ be an integer which is relatively prime to $n$. Prove that the map $x \mapsto x^k$ is surjective. Then use Lagrange's Theorem to prove that the same is true for \emph{any} finite group of order $n$. Note: For such $k$ each element has a $k$th root in $G$. It follows from Cauchy's theorem (section 3.2) that if $k$ is not relatively prime to the order of $G$, then the map $x \mapsto x^k$ is not surjective.
