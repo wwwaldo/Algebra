@@ -101,7 +101,7 @@ If $G$ is a group with group operation $\star$, then
 \begin{enumerate}
     \item The identity is unique
     \item The inverse is unique for each $a$ in $G$
-    \item The inverse is nilpotent (read: $(a^{-1})^{-1} = a$)
+    \item The inverse is idempotent (read: $(a^{-1})^{-1} = a$)
     \item The inverse of a multiplication is the multiplication of the inverses, reversed ( $(a \star b)^{-1} = (b^{-1}) \star (a^{-1})$)
     \item The group operation is associative \emph{in general} (read: on sequences of operations $a_1 \star \ldots \star a_n$).
 \end{enumerate}
@@ -116,6 +116,17 @@ If $G$ is a group with group operation $\star$, then
 
 \question (20) Show that for $x \in G$, $x^{-1}$ and $x$ have the same order.
 \begin{solution}
+% Hussain's solution
+Let $n$ be the order of $x$.
+\[
+(x^n)^{-1}\\
+= 1\\
+= (x^{-1})^n\\
+= 1
+\]
+\end{solution}
+
+\begin{solution}
 % Caroline's solution here
 Use the group `axioms'.
 If $x^n = 1$, then notice $1 = 1^{-1} = (x^n)^{-1} = (x^{-1})^n$ by (4) from the proposition. We're done.
@@ -123,18 +134,21 @@ If $x^n = 1$, then notice $1 = 1^{-1} = (x^n)^{-1} = (x^{-1})^n$ by (4) from the
 
 \question (25) Prove that if $x^2 = 1$ for all $x$ in $G$, then $G$ is abelian.
 \begin{solution}
+% Hussain's solution
+Let $y \in G$.
+
+By definition, $(yx)(xy)^2 = (yx)$.
+
+By the transitivity property: $(yx)(xy)(xy) = y(xx)y(xy) = (yy) xy = xy = yx$.
+
+Thus, $G$ is commutative.
+\end{solution}
+
+\begin{solution}
 % Caroline's solution here
 Show that the elements commute.
 If $a^2 = 1$ we can show $a = a^{-1}$ (use the cancellation property).
 then $ab = a^{-1}b^{-1} = (ba)^{-1} = ba$, so $G$ is abelian. 
-\end{solution}
-\begin{solution}
-%Hussain's alternative short solution
-\[
-1 = xyxy\\
-x = yxy\\
-yx = xy
-\]
 \end{solution}
 
 %==1.2==
@@ -166,6 +180,38 @@ Notes.
 \end{itemize}
 
 \question If $n$ is odd, and $n \geq 3$, show that the identity is the only element of $D_{2n}$ which commutes with all elements of $D_{2n}$.
+\begin{solution}
+% Hussain's solution
+Let $0 < i < n$.
+
+Then either elements of $G$ are of the form $r^i$, xor $r^i s$.
+
+In the first case:
+$r^i s = s r^{-i} = s r^{n-i}$,
+and the commutation is $s r^i$.
+These are only equal when $n-i = i \leftrightarrow n = 2i$,
+which contradicts the assumption that $n$ is odd.
+
+Thus, $r^i$ does not commute with every element of $G$, because it does not commute with $s$.
+
+In the second case:
+$(r^i s) s = r^i s^2 = r^i$,
+and the commutation is $s (r^i s) = s (s r^{-i}) = s^2 r^{-i} = r^{n-i}$.
+Similarly, these are only equal when $i = n-i \leftrightarrow n = 2i$,
+which contradicts $n$ being odd.
+
+Thus, $s r^i$ does not commute with all members of $G$, because it does not commute with $s$.
+
+By exhaustion, no member of $G$ except the identity commutes with all other members of $G$, because they all do not commute with $s$.
+
+The geometric intuition for this is as follows:
+for a flip and a rotation to commute, the flip has to preserve the location of the vertex v1 that the rotation takes v0 to.
+So: the rotation takes v0 to v1, then the flip preserves v1, or the flip preserves v1, then the rotation takes v0 to v1.
+
+Flips only preserve vertices that are opposite to v0 (on the same reflection axis).
+Only dihedral groups of even order have reflection axes that connect pairs.
+Thus, flips and rotations don't commute in dihedral groups of odd order.
+\end{solution}
 
 %Caroline's clunky solution
 \begin{solution}
@@ -202,6 +248,19 @@ Find the cycle decompositions of the following permutations:
 \tau \sigma \\
 \tau^2 \sigma
 \end{align*}
+
+\begin{solution}
+% Hussain's solution
+% solved with helper python script
+$\tau$ is not a bijection! (nothing maps to $2$.)
+\begin{verbatim}
+>>> de.decompose_cycles(s)
+[[5, 1, 3], [4, 2]]
+>>> de.decompose_cycles(de.compose(s, s))
+[[5, 3, 1], [4], [2]]
+\end{verbatim}
+\end{solution}
+
 
 \begin{solution}
 % Caroline's solution here... later
@@ -242,6 +301,34 @@ Since $0 \times 1 = 0 \times 0 = 0$, and $1 - 1 = 1 + 1 = 0$, there aren't any o
 \question For every integer $n$, find the number of elements of order $n$ in $S_5$.
 
 %(What's S_5?) -- Ans: Oh, it's the symmetric (permutation) group on sets of 5 elements.
+\begin{solution}
+% Hussain's solution:
+Every element can be decomposed into disjoint cycles.
+The order of an element is the lowest common multiple of the lengths of these cycles.
+The highest this can be is $6$ for $2 \times 3$, so there are no elements of order $n$ for $n > 6$.
+
+For order $5$, there are only cycles of length $5$
+with quantity $4! = 24$
+(obtained by fixing a reference first-element and enumerating possible paths).
+
+For order $4$, there are only cycles of length $4$ and $1$
+with quantity $5 \times 3! = 30$.
+
+For order $6$, there are only cycles of length $2$ and $3$,
+with quantity $5 \times 2 \times 2 = 20$.
+
+For order $3$, there are only cycles with lengths of $3$, $1$, and $1$,
+with quantity $(5 \times 2) \times 2 = 20$.
+
+For order $2$, there are cycles with lengths of $2$, $1$, $1$, and $1$,
+with quantity $5 \times 2 = 10$,
+and with paths $2$, $2$, and $1$,
+with quantity $5 \times 3 = 15$.
+
+For order $1$, there is only trivially the identity bijection.
+
+This totals up to $120 = 5!$, which is the order of the group.
+\end{solution}
 
 %Caroline-soln
 \begin{solution}
@@ -273,6 +360,11 @@ Notes
 % S_3 -> symmetry (permutation) group on three els
 % D_8 -> dihedral group on a square
 % Q_8 -> quaternion group
+\begin{solution}
+% Hussain's solution
+% Hussain hates tabulating things go away.
+\end{solution}
+
 \begin{solution}
 Table is always of the form (col) compose (row) -- this is consistent with the book's notation
 `` The (i, j) entry contains $g_i g_j$''.
@@ -367,6 +459,15 @@ If $G$ and $H$ are isomorphic groups, then
 \end{theorem}
 
 \question (17) Let $G$ be any group. Prove that the map from $G$ to itself defined by $g \mapsto g^2$ is a homomorphism if and only if $G$ is abelian.
+\begin{solution}
+% Hussain's solution
+\[
+(xy)^2 = x^2y^2\\
+x (y xy) = x (x y^2)\\
+(y x) y = (x y) y\\
+y x = x y\\
+\]
+\end{solution}
 
 %Caroline's soln, yay
 \begin{solution}
@@ -405,6 +506,31 @@ Property (2): Using the above definition of the homomorphism $\phi$, we compute,
 \question (17) Let $G$ be a group, and let $G$ act on itself by left conjugation, so that each $g \in G$ maps $G$ to $G$ by $$ x \mapsto g x g^{-1}.$$
 For fixed $g \in G$, prove that conjugation by $g$ is an isomorphism from $G$ onto itself (i.e., is an automorphism of $G$ -- see exc. 20 in section 6). Deduce that $x$ and $g x g^{-1}$ have the same order for all $x$ in $G$, and that for any subset $A$ of $G$, $|A| = |g A g^{-1}|$ ( here $g A g^{-1} = \{g a g^{-1} | a \in A \}$.)
 
+\begin{solution}
+% Hussain's solution
+Homomorphism:
+\[
+(g (x) g^{-1}) (g (y) g^{-1})\\
+= g (x) g^{-1} g (y) g^{-1}\\
+= g (x) (y) g^{-1}\\
+= g (xy) g^{-1}
+\]
+
+injectivity:
+\[
+g x g^{-1} = g y g^{-1}\\
+g x = g y\\
+x = y
+\]
+
+Surjectivity:
+Define the inverse map as $x \mapsto g^{-1} x g$.
+This is also homomorphic and injective, per above.
+
+order:
+These just follow from the fact that it is a group isomorphism.
+\end{solution}
+
 %==Supplementary Notes: Counting, Group Actions, and the Orbit-Stabilizer lemma==
 \begin{itemize}
 \item Many groups are actions on sets. We say $G$ acts on $A$ (on the left) if we can build an evaluation function $\alpha: G \times A \to A$ taking $(g, a) \mapsto g \cdot a$. The evaluation satisfies the following:
@@ -426,6 +552,40 @@ For fixed $g \in G$, prove that conjugation by $g$ is an isomorphism from $G$ on
 \part An arbitrary group acting on itself, using $\alpha(g,a) = g a g^{-1}$ as the evaluation function.
 \end{parts}
 
+\begin{solution}
+% Hussain's solution
+---dihedrals on vertices
+Yes. The underlying permutation sets look like this:
+flip:
+for order $2n$: $n$ 2-cycles
+for order $2n+1$: $n$ 2-cycles and $1$ 1-cycle
+rotations by r:
+for order $2n$ and $2n+1$: $n$ cycles of length $1 + (r^{-1} mod n)$
+
+---dihedrals on diagonals
+Yes, but the permutation sets are too complicated to list out.
+
+---group right-multiplication
+Not necessarily a homomorphism:
+\[
+a.(g.h)\\
+= (a.h).g\\
+= a.(h.g)\\
+\leftrightarrow g.h = h.g
+\]
+
+Which is not true for non-abelian groups.
+
+-group conjugation
+Yes.
+compatibility:
+\[
+(g.h) a (g.h)^{-1}\\
+= g (h a h^{-1}) h
+\]
+
+And trivially for the identity ($g E g^{-1} = E$).
+\end{solution}
 % Educated guesses
 \begin{solution}
 Yes.
@@ -438,6 +598,44 @@ No -- $ab(c) = a(bc)$ implies $ab c (ab)^{-1} = a (bc) a^{-1}$ implies $c b^{-1}
 \question Say we want to count how many different necklaces we can build with 6 stones each, if we have stones of two different colours. Define a \emph{diagram} to be any way of colouring each of the six vertices of a hexagone with black or white. Notice that $|A| = 64$. (?) Show that $D_{12}$ acts on $A$, and that the number of orbits of this action is equal to the number of different necklaces.
 Note: This shows that the problem of counting the number of orbits of an action is an interesting problem in combinatorics.
 
+\begin{solution}
+% hussain's attempt
+Let $R$ be the following $6 \times 6$ matrix:
+\[
+\begin{matrix}
+0 & \cdots & 1\\
+1 & \ddots & 0\\
+\vdots & \cdots & \vdots\\
+\cdots & 1 & 0
+\end{matrix}
+\]
+(which rotates vector components),
+
+and $S$ be the folowing $6 \times 6$ matrix:
+\[
+\begin{matrix}
+0 & \cdot & 1\\
+& \vdot & \ddot & \vdot\\
+1 & \cdot & 0
+\end{matrix}
+\]
+(which flips vectors).
+
+Represent a member $a \in A$ as a vector $v \in (Z/2Z)^6$, with $1$ for white, $0$ for black, the first component representing the top-most vertex on the hexagon, and proceding counter-clockwise.
+
+Then, $S_12$ acts on $A$ as follows:
+$$(r, v) \mapsto Rv$$,
+$$(s, v) \mapsto Sv$$.
+
+In particular, $R^{-1} = R^T$, $R^6 = I_6$ and $S^2 = I_6$, and we have:
+$r.(r.a) = (r.r).a = R^2 v$,
+$r.(s.a) = (s.r).a = (s.r^{-1}).a = S R^{-1} v$,
+$(E).a = I_6 v = v = a$,
+$s.(s.a) = (s.s)a = S^2 v = I_6 v = v$.
+
+%rest about counting orbits
+
+\end{solution}
 \question Consider the following diagrams: ((some diagrams of 6-necklaces))
 For each necklace, compute the size of its orbit, and the size of its stabilizer. Make a conjecture or formula that relates these two numbers for an arbitrary element in an arbitrary action. Prove it.
 \end{questions}
