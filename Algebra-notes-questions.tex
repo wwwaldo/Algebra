@@ -640,17 +640,35 @@ $s.(s.a) = (s.s)a = S^2 v = I_6 v = v$.
 For each necklace, compute the size of its orbit, and the size of its stabilizer. Make a conjecture or formula that relates these two numbers for an arbitrary element in an arbitrary action. Prove it.
 \end{questions}
 
+% referenced by q19
 \section{Weeks 3 and 4}
 \begin{questions}
 % Note -- section 0.2 was assigned as supplmentary reading this week and I may add notes here later
 
 %==1.7== buh buh
+\subsection{1.7}
 
 % referenced by q19
 \question (18) Let $H$ be a group acting on a set $A$. Prove that the relation $\sim$ on $A$ defined by \[ a \sim b \text{ if and only if } a = hb \text{ for some } h \in H \] is an equivalence relation. (For each $x \in A$ the equivalence class of $x$ under $\sim$ is called the \emph{orbit} of $x$ under the action of $H$. The orbits under the action of $H$ [artition the set $A$. 
 
+% Caroline's
+\begin{solution}
+Aside -- I think this is just proving that right cosets of $H$ are well-defined equivalence classes given that $H$ is a subgroup? Anyways.
+\begin{itemize}
+\item Reflexivity. We can show that the identity belongs to any subgroup following the subgroup axioms. Hence for all $a \in G$, $a = (1)a$ implies that $a \sym a$.
+\item Symmetry. Suppose $a \sym b$. Then $a = hb \implies b = h^{-1}a$ (by group action associativity + action of identity on $A$). Since subgroups are closed under inverses, $h^{-1} \in H$ and so $b \sym a$.
+\item Transitivity. Suppose $a \sym b$ and $b \sym c$. Then $a = hb, b = h'c$ so $a = hh'c$ where $h, h'$ belong to $H$. By closure of subgroups under the group operation, $a \sym c$.
+\end{itemize}
+\end{solution}
+
 \question (19) Let $H$ be a subgroup (see exc. 26 of section 1) of the finite group $G$ and let $H$ act on $G$ (here $A = G$) by left multiplication. Let $x \in G$ and let $\mathcal{O}$ be the orbit of $x$ under the action of $H$. Prove that the map \[ H \to \mathcal{O} \text{ defined by } h \mapsto h x \] is a bijection (hence all orbits have cardinality $|H|$). From this and the preceding exercise deduce \emph{Lagrange's Theorem}: \\
 \emph{if $G$ is a finite group and $H$ is a subgroup of $G$, then $|H|$ divides $|G|$.}
+
+\begin{solution}
+(This is kind of `baby lagrange' since it works only for finite sets.)
+That the map is surjective follows from the definition of the orbit of $x$. Why is it injective? Suppose $h, h' \in H$ and $hx = h'x$. Then by the cancellation property, $h = h'$. Hence, every distinct orbit has exactly $|H|$ elements.
+By exercise 18 above, $H$ partitions $G$ into \emph{disjoint} sets (specifically, by the transitivity property of equivalence relations). Since every $x\in G$ belongs to some orbit, it follows that $|G|$ is an integer multiple of $|H|$, or equivalently, that $|H|$ divides $|G|$. (We cannot have fractional numbers of elements, nor can a single element belong to more than one $H$. Fooey.)
+\end{solution}
 
 %==2.1== (Subgroups)
 \begin{itemize}
