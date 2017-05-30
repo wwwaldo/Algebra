@@ -830,6 +830,57 @@ This section has a lot of diagrams. They basically look like prime factorization
 Notably, the Klein-4 group (no, not that one) has the shape of a diamond.
 Secretly these are also (CS) graphs. Doy!
 
+Oh, here's a formal definition: Lattices are partial orders of a group and its subgroups, where the ordering is given by inclusion.
+The unique smallest subgroup which contains the subgroups $H, K$ is called the \emph{join} of $H, K$ and is denoted by $\langle H, K \rangle$.
+
+\subsection{3.1 - Quotient Groups}
+% yay quotient groups
+
+the lattice of subgroups for a quotient of G is reflected at the ``top'' (in a precise sense) of the lattice for G whereas the lattice for a subgroup of G occurs naturally at the bottom.
+The study of quotient groups is equivalent to the study of homomorphisms of $G$ , as we shall see.
+Suppose phi is a homomorphism from G to H, and recall that the fibers of phi are the sets of elements of G which project to single elements of H.
+The group operation of H provides a way to multiply two elememts in the image pf phi, which suggest a natural multiplication for the fibers lying above the two points. Thus the set of fibers becomes a group: If $X_a, X_b$ are the fibers above $a, b \in H$ resp., then we define $X_a \dot X_b = X_{ab}$.
+Roughly speaking, the group $G$ is partitioned into pieces (the fibers) and these pieces themselves have the structure of a group, called a quotient group of G.
+Since the multiplication of fibers is defined from multiplication in $H$, by construction the quotient group is isomorphic to the image of $G$ under the homomorphism phi. (The fiber X_a is identified with its image a in H.)
+
+(an example with modular arithmetic -- I'm underselling it but w/e will type later)
+
+Definition. If phi is a homomorphism from G to H, the kernel of phi is the set $\{ g \in G | \phi(g) = 1 \}$ and will be denoted by $\text{ker }\phi$ (here 1 is the identity of $H$).
+
+\begin{theorem}[Proposition 1]
+Let $G$ and $H$ by groups and let \phi : G \to H be a homomorphism.
+\begin{enumerate}
+\item $\phi(1_G) = 1_H$,
+\item $\phi(g^{-1}) = \phi(g)^{-1}$
+\item $\phi(g^n) = \phi(g)^n$
+\item $\text{ker}(\phi)$ is a subgroup of $G$
+\item $\text{im}(\phi)$, the image of $G$ under $\phi$, is a subgroup of $H$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+% should mostly be straightforward
+\end{proof}
+
+Definition. The quotient group $G / K$ (read: G modulo K or simply G mod K), is the group whose elements are the fibers of phi with group operation defined above.
+
+The notation emphsizes the fact that the kernel is a single element in the quotient group and that the other elements are just the ``translates'' of the kernel. Hence we may think of $G/K$ as being obtained by ``dividing out'' K from G. This is why $G / K$ is called a ``quotient'' group.
+
+Note: Instead of defining phi explicitly, we can also defined multiplication of fibers directly in terms of representatives from the fibers.
+
+\begin{theorem}[Proposition 2]
+Let phi be a homomorphism (...) and X be the fiber above a. Then
+\begin{enumerate}
+\item For u in X, $X = \{ uk | k \in K \}$
+\item For u in X, $X = \{ ku | k \in K \}$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+% hey we were arguing about this earlier
+\end{proof}
+
+% then like 6 more pages I'll be back ok
+
+
 %==3.1== Quotient groups!! And homomorphisms
 \question (10) Let $\phi : \frac{\mathbb{Z}}{8 \mathbb{Z}} \to \frac{\mathbb{Z}}{4 \mathbb{Z}}$ by $\phi(\bar{a}) = \bar{a}$. Show that this is a well-defined, srjective homomorphism, and describe its fibers and kernel explicitly (Note: showing that $\phi$ is well-defined involves the fact that $\bar{a}$ has a different meaning in the domain and range of $\phi$.)
 
