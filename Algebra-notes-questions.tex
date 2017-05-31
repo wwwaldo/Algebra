@@ -858,30 +858,110 @@ Let $G$ and $H$ by groups and let \phi : G \to H be a homomorphism.
 \end{enumerate}
 \end{theorem}
 \begin{proof}
-% should mostly be straightforward
+(1) Since $\phi(1_G) = \phi(1_G \cdot 1_G) = \phi(1_G) \cdot \phi(1_G), the cancellation laws show that (1) holds. 
+(2) 1_H = \phi(g \cdot g^{-1}) = phi(g^{-1}) \cdot \phi(g). By uniqueness of inverse, $\phi(g^{-1}) = \phi(g)$. The first equality follows from (1).
+(3) Even the authors don't want to do this one. Note part (2) implies the equality for negative $n$ also.
+(4) Use the textbook subgroup criterion: Suppose $x,y \in \text{ker}(\phi)$ and check that $xy^{-1}$ is as well: $\phi(xy^{-1}) = \phi(x)\phi(y^{-1}) = 1 \cdot 1^{-1} = 1$.
+(5) Careful: The image resides in $H$, not $G$. Check, for $x,y \in H$: $xy^{-1} = \phi(q) \phi(r)^{-1} = \phi(qr^{-1})$. Since $G$ is a group, we're done. (Also be careful to check that the image is nonempty. Use part 1 for this.)
 \end{proof}
 
-Definition. The quotient group $G / K$ (read: G modulo K or simply G mod K), is the group whose elements are the fibers of phi with group operation defined above.
+% Alternate pf of (1)
+% (1) $1_H \cdot \phi(x) = \phi(x) = \phi(1_G \cdot x) = \phi(1_G) \cdot \phi(x).
+% Then use the cancellation property and uniqueness of inverse. (don't worry too much about fibers; these are essentially just values.)
+
+Definition. The quotient group $G / K$ (read: G modulo K or simply G mod K), is the group whose elements are the fibers of $\phi$ with group operation defined above.
 
 The notation emphsizes the fact that the kernel is a single element in the quotient group and that the other elements are just the ``translates'' of the kernel. Hence we may think of $G/K$ as being obtained by ``dividing out'' K from G. This is why $G / K$ is called a ``quotient'' group.
 
-Note: Instead of defining phi explicitly, we can also defined multiplication of fibers directly in terms of representatives from the fibers.
+Note: Instead of defining phi explicitly, we can also define multiplication of fibers directly in terms of representatives from the fibers.
 
 \begin{theorem}[Proposition 2]
-Let phi be a homomorphism (...) and X be the fiber above a. Then
+Let $\phi$ be a homomorphism (...) and $X$ be the fiber above $a$. Then
 \begin{enumerate}
 \item For u in X, $X = \{ uk | k \in K \}$
 \item For u in X, $X = \{ ku | k \in K \}$.
+(note that these are respectively, the left and right cosets of $K$ wrt $u$.)
 \end{enumerate}
 \end{theorem}
 \begin{proof}
-% hey we were arguing about this earlier
+(1) : Certainly $uk \in X$ given $k \in K$. On the other hand, suppose $b$ belongs to $X$. Then $1_H = a a^{-1} = \phi(b) \phi(u)^{-1} = \phi(b \cdot u^{-1}), so $b u^{-1}$ lies in $K$. But this means precisely that $b u^{-1} = k \implies b = uk$. (2) is similar.
 \end{proof}
 
-% then like 6 more pages I'll be back ok
+Definition (actually). For any $N \leq G$ and $g \in G$, let $gN = \{ gn | n \in N \}, Ng = \{ ng | n \in N \}$. These are the \emph{left and right cosets} of $N$ with respect to $g$, respectively. \emph{Any element of a coset is called a representative for the coset.}
 
+If $N$ is the kernel of a homomorphism, and $g_1$ is any representative for $gN$, then $g_1 N = gN$. In fact, this is valid for arbitrary subgroups $N$, which explains the terminology of a representative.
 
-%==3.1== Quotient groups!! And homomorphisms
+Using additive notation, we can also write $g + N, N + g$ for the left and right cosets of $N$ wrt $g$. Recall: The right cosets of $N$ in $G$ are precisely the orbits of $N$ acting on $G$ by left multiplication. (quoting terminology from 1.7.18 -- the orbit of $x$ in a set $A$ is the equivalence class of $x$ under the usual equivalence relation $x \sym y \iff x = ny, n \in N$. So.. this is kind of abuse of terminology by the textbook?)
+
+Thus we just showed that the \emph{fibers of a homomorphism are the left/right cosets of the kernel}.
+
+\begin{theorem}[Theorem 3]
+Let $K$ be the kernel of any homomorphism from $G$ to some other group. Then the left cosets of $K$ with group operation defined by $uK \circ vK = (uv)K$ forms the quotient group $G / K$.
+This group operation is well-defined: Given the two cosets $uK, vK$, if $u_1, v_1$ are elements of those respective cosets, then $u_1 v_1 \in (uv)K$. In other words, the group operation \emph{does not depend} on the representatives we choose for the cosets.
+\end{theorem}
+\begin{proof}
+Let $X,Y \in G / K$, and let $Z = XY$ in $G/K$, so that by proposition 2, $X$, $Y$ and $Z$ are left cosets of $K$. By assumption, $K$ is the kernel of some homomorphism $\phi: G \to H$. Thus $X = \phi^{-1}(a), Y = \phi^{-1}(b)$ for $a,b \in H$ (so $X = aK, Y = bK$). Then $Z = \phi^{-1}(ab)$ by definition of the group operation.
+
+Now let $u, v$ be arbitrary representatives of $X, Y$ resp. We must show that $uv \in Z$. 
+
+\begin{align*}
+uv \in Z \iff uv \in \phi^{-1}(ab) \\
+\iff \phi(uv) = ab 
+\iff \phi(u)\phi(v) = ab 
+\end{align*}
+
+The last line is true, so $uv \in Z$, and in particular (again by proposition 2), $Z = uvK$. This proves that the product of $X$ with $Y$ is the coset $uvK$, for any choice of representative $u,v$. The last statement of the theorem follows from the fact that $uK = Ku, vK = Kv$ for all $u,v \in G$.
+\end{proof}
+
+As a concrete example of ``reducing a group to only its cosets'', notice that in $\frac{\mathbb{Z}}{5 \mathbb{Z}}, we don't distiguish between 6 and 11 -- both are 1 mod 5. (The homomorphism takes elements to their mod 5 equivalents.)
+
+\begin{theorem}[Proposition 4]
+Let $N$ be any subgroup of $G$. Then the set of left cosets of $N$ in $G$ form a partition of $G$, $uN = vN$ iff $uv^{-1} \in N$ iff $u, v$ are representatives of the same coset.
+\end{theorem}
+\begin{proof}
+Here is a sketch: Show that distinct left cosets have empty intersection by assuming otherwise and obtaining a contradiction.
+The second part of the theorem follows from the first after symbolic manipulations. The third part is definitions.
+\end{proof}
+
+\begin{theorem}[Proposition 5]
+Let $N$ be a subgroup of $G$.
+\begin{enumerate}
+\item The group operation on left cosets is well-defined iff $gng^{-1} \in N$ for all $g \in G, n \in N$. (This can be rephrased as saying that the normalizer of $N$ is all of $G$.)
+\item When the group operation on left cosets is well-defined, the left cosets of $N$ for a group.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+Assume first that the operation is well-defined. Fix $g, n$. Notice that the coset $nN = 1N$, so that $(1g^{-1})N = (ng^{-1})N$ (so that g^{-1} and ng^{-1} are also representatives for the same coset). Thus g^{-1}n' = ng^{-1}, for some $n' \in N$. Multiplying both sides on the left by $g$ shows that the conjugate $g n g^{-1}$ belongs to $N$, as desired.
+Conversely, assme that $g n g^{-1} \in N$ for all $g, n$. To show that the operation is well-defined, let $u, u_1 \in uN, v, v_1 \in vN$. Then (by previous theorems) we can write $u_1 = n, v_1 = vm$ for $n,m \in N$. We must show that $u_1 v_1 \in (uv)N$: $u_1v_1 = (un)(vm) = uvv^{-1}nvm = uvn'm = (uv)n''$ for $n'' \in N$, as desired.
+(2) : Proof in textbook, should be straightforward.
+\end{proof}
+
+Definitions (which are equivalent to saying that normal subgroups have left and right cosets equal): $gng^{-1}$ is called the conjugate of $n \in N$ by $H$. The set $gNg^{-1} = \{ gng^{-1} | n \in N \}$ is called the conjgate of $N$ by $g$. $g$ is said to normalize $N$ if $gNg^{-1} = N$. (so it normalizes all the $n$). $N$ is normal if every element of $G$ normalizes $N$. If $N$ is a normal subgroup of $G$, we write $N \trianglelefteq G$.
+
+The following theorem summarizes these results.
+\begin{theorem}[Theorem 6]
+The following are equivalent:
+\begin{enumerate}
+\item $N \trianglelefteq G$
+\item The normalizer of $N$ in $G$ is equal to $G$ (Notation: $N_G(N) = G$)
+\item $gN = Ng$ for all $g$
+\item The quotient group is \emph{actually} a group
+\item all the $g$ normalize $N$ (oy. Notation: $gNg^{-1} \subseteq N$ for all $g \in G$ (why $\subseteq$ now? weird.)
+\end{enumerate}
+\end{theorem}
+
+As you might have guessed by now, $N$ is normal iff it is the kernel of some homomorphism (Proposition 7). We can explicitly construct it: $\pi: g \to G/N, \pi(g) = gN$ for all $g \in G$. (proof omitted.)
+
+Definition. The homomorphism $\pi$ is called the natural projection (aside: `natural' is actually a defined term in category theory; it loosely translates to being `coordinate-free') of $G$ onto $G/N$. If $\bar{H} \leq G/N$, then we define the \emph{complete preimage} of $\bar{H}$ in $G$ to be the preimage of $\bar{H}$ under the natural projection homomorphism.
+
+Note: The complete preimage is a subgroup of $G$ which contains $N$.
+Note 2: We can in some sense think of the normalizer of a subgroup $N$ to measure `how close' $N$ is to being a normal subgroup. However, keep in mind that normality is an embedding property, not an intrinsic one: it depends on the ambient space which $N$ is embedded in. 
+
+Conclusion: The study of homomorphic images of $G$ is \emph{equivalent} to the study of quotient groups of $G$.
+
+Some examples: Abelian groups have all subgroups normal. Quotient groups of a cyclic group are always cyclic. (...)
+
+% Finally! Done this section. Exercises follow.
 \question (10) Let $\phi : \frac{\mathbb{Z}}{8 \mathbb{Z}} \to \frac{\mathbb{Z}}{4 \mathbb{Z}}$ by $\phi(\bar{a}) = \bar{a}$. Show that this is a well-defined, srjective homomorphism, and describe its fibers and kernel explicitly (Note: showing that $\phi$ is well-defined involves the fact that $\bar{a}$ has a different meaning in the domain and range of $\phi$.)
 
 %==3.2== Cosets and Lagrange's theorem -- Oh shit there are a lot of legit proofs in this section
